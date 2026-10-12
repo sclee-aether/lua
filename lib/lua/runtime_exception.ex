@@ -5,14 +5,13 @@ defmodule Lua.RuntimeException do
 
   @impl true
   def exception({:lua_error, error, state}) do
-    message = Util.format_error(error)
     stacktrace = :luerl.get_stacktrace(state)
 
     %__MODULE__{
       original: error,
       state: state,
       message: """
-      Lua runtime error: #{message}
+      Lua runtime error: #{inspect(error)}
 
       #{Util.format_stacktrace(stacktrace, state)}
       """

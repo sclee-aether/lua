@@ -92,18 +92,7 @@ defmodule Lua.Util do
         """
 
       {{func, args, _}, {_, _, context}} ->
-        name =
-          case func do
-            nil -> " <unknown function>#{format_args(args)}"
-            "-no-name-" -> ""
-            {:luerl_lib_basic, :basic_error} -> format_error(func, args)
-            {:luerl_lib_basic, :basic_error, :undefined} -> format_error(func, args)
-            {:luerl_lib_basic, :error_call, :undefined} -> format_error(func, args)
-            {:luerl_lib_basic, :assert, :undefined} -> format_error(func, args)
-            func -> " #{format_function([func], args)}"
-          end
-
-        "#{script_name} line #{context[:line]}:#{name}"
+        "#{script_name} line #{context[:line]}"
     end)
   end
 
